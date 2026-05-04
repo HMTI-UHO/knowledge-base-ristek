@@ -1,0 +1,16 @@
+services:
+  quartz:
+    image: node:22-slim
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    ports:
+      - "8080:8080"
+    command: >
+      sh -c "if [ ! -f package.json ]; then
+               npx lucide-static@latest init;
+             fi &&
+             npm install &&
+             npx quartz build --serve"
+    environment:
+      - NODE_ENV=development
