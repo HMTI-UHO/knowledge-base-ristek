@@ -20,7 +20,7 @@ Halaman ini mencatat setiap perubahan secara otomatis melalui GitHub Actions.
 - feat: inisialisasi Knowledge Base Ristek HMTI-UHO (de18bfc)
 - initial commit (56a6a83)
 - fix(citations): correct URL for CSL locales (#2377) (d25a6ea)
-*Daftar perubahan akan muncul di sini secara otomatis...*
+
 ---
 
 > [!NOTE]
