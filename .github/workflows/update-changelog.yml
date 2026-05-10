@@ -22,7 +22,7 @@ jobs:
           echo "### Latest Updates ($(date +'%Y-%m-%d'))" > latest_changes.txt
           git log -10 --pretty=format:"- %s (%h)" >> latest_changes.txt
           
-      - name: Write to Changelog.md
+            - name: Write to Changelog.md
         run: |
           # Mengarahkan langsung ke path content/06-Changelog.md
           CHANGELOG_PATH="content/06-Changelog.md"
@@ -32,9 +32,9 @@ jobs:
             exit 1
           fi
           
-          # Membersihkan area di antara tag dan menyisipkan log baru
-          sed -i '//,//{//!d}' "$CHANGELOG_PATH"
-          sed -i '//r latest_changes.txt' "$CHANGELOG_PATH"
+          # Insert the latest changes after the "Update History" section
+          sed -i '/## 🛠️ Update History/a\\' "$CHANGELOG_PATH"
+          sed -i '/## 🛠️ Update History/r latest_changes.txt' "$CHANGELOG_PATH"
 
       - name: Commit and Push
         run: |
