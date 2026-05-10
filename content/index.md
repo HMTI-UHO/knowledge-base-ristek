@@ -17,10 +17,12 @@ Pilih jalur eksplorasi Anda berdasarkan peran dan kebutuhan:
 
 | Jalur                                                                                 | Deskripsi                                                              | Tujuan                    |
 | :------------------------------------------------------------------------------------ | :--------------------------------------------------------------------- | :------------------------ |
+| **🫱🏼‍🫲🏻 [[01-Prologue/010-introduction\|Get to know first]]**                     | Mari kenalan dengan Knowledge Base ini                                 | Mari Berkenalan           |
 | **🚀 [[02-Getting Started/010-onboarding overview.md\|Getting Started]]**             | Persiapan awal bagi anggota baru.                                      | Setup Environment & Tools |
 | **🛠️ [[03-Core Programs/index.md\|Core Programs]]**                                  | Penjelasan mendalam 5 Program Kerja dan 2 rencana pengembangan ristek. | Memahami Rencana Aksi     |
 | **📚 [[04-Archive & Community/020-learning resources archive.md\|Learning Archive]]** | Gudang modul, paper, dan video pembelajaran.                           | Belajar & Riset           |
 | **📖 [[05-Tutorials & SOP/index.md\|Tutorials & SOP]]**                               | Kitab teknis untuk pengelola kementerian.                              | Pemeliharaan Sistem       |
+
 
 ---
 
