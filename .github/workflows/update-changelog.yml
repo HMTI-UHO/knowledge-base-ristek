@@ -3,32 +3,36 @@ name: Update Changelog
 on:
   push:
     branches:
-      - main  # Memicu aksi setiap ada push ke main
+      - main
+
+permissions:
+  contents: write # Menegaskan izin menulis secara eksplisit
 
 jobs:
   update_changelog:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Generate Changelog Content
         run: |
-          # Mengambil 10 commit terakhir
           echo "### Latest Updates ($(date +'%Y-%m-%d'))" > latest_changes.txt
           git log -10 --pretty=format:"- %s (%h)" >> latest_changes.txt
           
       - name: Write to Changelog.md
         run: |
-          # Logika untuk menyisipkan teks di antara tag sed -i '//,//{//!d}' 06-Changelog.md
+          # Menyisipkan konten ke file 06-Changelog.md
+          sed -i '//,//{//!d}' 06-Changelog.md
           sed -i '//r latest_changes.txt' 06-Changelog.md
 
       - name: Commit and Push
         run: |
-          git config --global user.name "HMTI Bot"
-          git config --global user.email "bot@hmti-uho.org"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add 06-Changelog.md
-          git commit -m "docs: auto-update changelog [skip ci]"
+          # [skip ci] sangat penting agar tidak terjadi looping build
+          git commit -m "docs: auto-update changelog [skip ci]" || echo "No changes to commit"
           git push
