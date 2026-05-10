@@ -22,7 +22,7 @@ jobs:
           echo "### Latest Updates ($(date +'%Y-%m-%d'))" > latest_changes.txt
           git log -10 --pretty=format:"- %s (%h)" >> latest_changes.txt
           
-            - name: Write to Changelog.md
+      - name: Write to Changelog.md
         run: |
           # Mengarahkan langsung ke path content/06-Changelog.md
           CHANGELOG_PATH="content/06-Changelog.md"
