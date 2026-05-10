@@ -4,7 +4,7 @@ title: Changelog
 
 # 📜 System Changelog
 
-Halaman ini mencatat setiap perubahan, pembaruan, dan perbaikan yang dilakukan pada Knowledge Base Ristek secara otomatis melalui GitHub Actions.
+Halaman ini mencatat setiap perubahan secara otomatis melalui GitHub Actions.
 
 ---
 
@@ -22,5 +22,6 @@ Halaman ini mencatat setiap perubahan, pembaruan, dan perbaikan yang dilakukan p
 - fix(citations): correct URL for CSL locales (#2377) (d25a6ea)
 *Daftar perubahan akan muncul di sini secara otomatis...*
 ---
+
 > [!NOTE]
-> Changelog ini sinkron dengan riwayat commit pada repositori GitHub Organization HMTI-UHO.
+> Changelog ini sinkron dengan riwayat commit HMTI-UHO.

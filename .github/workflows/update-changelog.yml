@@ -24,17 +24,16 @@ jobs:
           
       - name: Write to Changelog.md
         run: |
-          # Mengarahkan langsung ke path content/06-Changelog.md
           CHANGELOG_PATH="content/06-Changelog.md"
           
-          if [ ! -f "$CHANGELOG_PATH" ]; then
-            echo "Error: File tidak ditemukan di $CHANGELOG_PATH"
-            exit 1
-          fi
-          
-          # Insert the latest changes after the "Update History" section
-          sed -i '/## 🛠️ Update History/a\\' "$CHANGELOG_PATH"
-          sed -i '/## 🛠️ Update History/r latest_changes.txt' "$CHANGELOG_PATH"
+          # Membuat isi changelog baru dari git log
+          echo -e "\n### Updated on $(date +'%Y-%m-%d %H:%M') WITA" > updates.txt
+          git log -10 --pretty=format:"- %s (%h)" >> updates.txt
+          echo -e "\n" >> updates.txt
+
+          # Instruksi Robot: Hapus konten lama di antara tag, lalu masukkan updates.txt
+          sed -i '//,//{//!d}' "$CHANGELOG_PATH"
+          sed -i '//r updates.txt' "$CHANGELOG_PATH"
 
       - name: Commit and Push
         run: |
