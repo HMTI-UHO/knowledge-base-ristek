@@ -32,8 +32,7 @@ jobs:
           echo -e "\n" >> updates.txt
 
           # Instruksi Robot: Hapus konten lama di antara tag, lalu masukkan updates.txt
-          sed -i '//,//{//!d}' "$CHANGELOG_PATH"
-          sed -i '//r updates.txt' "$CHANGELOG_PATH"
+          sed -i '/<updates>/,/<\/updates>/{/<updates>/!{/<\/updates>/!d;};};/<updates>/r updates.txt' "$CHANGELOG_PATH"
 
       - name: Commit and Push
         run: |
