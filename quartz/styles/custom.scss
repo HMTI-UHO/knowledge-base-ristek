@@ -1,3 +1,34 @@
 @use "./base.scss";
 
 // put your custom CSS here!
+/* Tampilan untuk Mobile (Layar di bawah 768px) */
+// quartz/styles/custom.scss
+
+/* Pengaturan khusus untuk tampilan Mobile (Android/iOS) */
+@media all and (max-width: 768px) {
+  .page-title {
+    // Memberikan ruang agar tidak terlalu mepet dengan Search bar
+    margin-bottom: 0.5rem; 
+
+    a {
+      /* 1. Sembunyikan teks asli yang panjang */
+      font-size: 0; 
+      display: block;
+      line-height: 1.2;
+      
+      /* 2. Sisipkan teks baru yang lebih ringkas */
+      &::before {
+        content: "Ristek Knowledge Base"; // Teks ringkas khusus mobile
+        font-size: 1.3rem; // Ukuran font yang pas untuk HP
+        font-weight: 700;
+        color: var(--secondary); // Mengikuti warna tema Quartz Anda
+        
+        /* 3. Bungkus teks agar rapi */
+        display: block;
+        white-space: normal; // Mengizinkan teks turun ke bawah jika layar sangat sempit
+        word-wrap: break-word;
+        max-width: 180px; // Membatasi lebar agar tidak menabrak tombol Darkmode/Search
+      }
+    }
+  }
+}

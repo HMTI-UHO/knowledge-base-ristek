@@ -8,7 +8,7 @@ import * as Plugin from "./quartz/plugins"
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "Knowledge Base",
+    pageTitle: "Knowledge Base Department Riset dan Teknologi",
     pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
@@ -78,7 +78,16 @@ const config: QuartzConfig = {
       Plugin.AliasRedirects(),
       Plugin.ComponentResources(),
       Plugin.ContentPage(),
-      Plugin.FolderPage(),
+      Plugin.FolderPage({
+      sort: (a, b) => {
+        const nameA = a?.name ?? ""
+        const nameB = b?.name ?? ""
+        return nameA.localeCompare(nameB, undefined, {
+          numeric: true,
+          sensitivity: "base",
+        })
+      },
+    }),
       Plugin.TagPage(),
       Plugin.ContentIndex({
         enableSiteMap: true,

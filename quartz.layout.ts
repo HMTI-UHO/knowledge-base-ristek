@@ -1,20 +1,39 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
 
-// components shared across all pages
+// 1. Definisikan Explorer yang sudah kita modifikasi agar bisa dipakai di kedua layout
+const sharedExplorer = Component.Explorer({
+  filterFn: (node: any) => {
+    return node.name !== "00 - Meta"
+  },
+  mapFn: (node: any) => {
+    if (node && node.displayName) {
+      node.displayName = node.displayName.replace(/^(\d+[-_])+\s*/, "")
+    }
+  },
+  sortFn: (a: any, b: any) => {
+    const nameA = a?.name ?? ""
+    const nameB = b?.name ?? ""
+    return nameA.localeCompare(nameB, undefined, {
+      numeric: true,
+      sensitivity: "base",
+    })
+  },
+  order: ["filter", "map", "sort"],
+})
+
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
   afterBody: [],
   footer: Component.Footer({
     links: {
-      GitHub: "https://github.com/jackyzha0/quartz",
-      "Discord Community": "https://discord.gg/cRFFHYye7t",
+      GitHub: "https://github.com/HMTI-UHO",
+      "Discord HMTI": "",
     },
   }),
 }
 
-// components for pages that display a single page (e.g. a single note)
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
     Component.ConditionalRender({
@@ -30,15 +49,12 @@ export const defaultContentPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Flex({
       components: [
-        {
-          Component: Component.Search(),
-          grow: true,
-        },
+        { Component: Component.Search(), grow: true },
         { Component: Component.Darkmode() },
         { Component: Component.ReaderMode() },
       ],
     }),
-    Component.Explorer(),
+    sharedExplorer, // Menggunakan explorer yang sudah di-fix
   ],
   right: [
     Component.Graph(),
@@ -47,22 +63,22 @@ export const defaultContentPageLayout: PageLayout = {
   ],
 }
 
-// components for pages that display lists of pages  (e.g. tags or folders)
 export const defaultListPageLayout: PageLayout = {
-  beforeBody: [Component.Breadcrumbs(), Component.ArticleTitle(), Component.ContentMeta()],
+  beforeBody: [
+    Component.Breadcrumbs(), 
+    Component.ArticleTitle(), 
+    Component.ContentMeta()
+  ],
   left: [
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
     Component.Flex({
       components: [
-        {
-          Component: Component.Search(),
-          grow: true,
-        },
+        { Component: Component.Search(), grow: true },
         { Component: Component.Darkmode() },
       ],
     }),
-    Component.Explorer(),
+    sharedExplorer, // Explorer di halaman folder sekarang juga ter-fix!
   ],
   right: [],
 }
