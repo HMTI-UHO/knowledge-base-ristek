@@ -16,7 +16,7 @@ const config: QuartzConfig = {
       provider: "plausible",
     },
     locale: "en-US",
-    baseUrl: "quartz.jzhao.xyz",
+    baseUrl: "hmti-uho.github.io/knowledge-base-ristek",
     ignorePatterns: ["private", "templates", ".obsidian", "00 - Meta", ".git"],
     defaultDateType: "modified",
     theme: {
