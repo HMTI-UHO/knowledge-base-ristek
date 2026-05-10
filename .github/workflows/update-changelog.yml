@@ -6,7 +6,7 @@ on:
       - main
 
 permissions:
-  contents: write # Menegaskan izin menulis secara eksplisit
+  contents: write
 
 jobs:
   update_changelog:
@@ -24,15 +24,23 @@ jobs:
           
       - name: Write to Changelog.md
         run: |
-          # Menyisipkan konten ke file 06-Changelog.md
-          sed -i '//,//{//!d}' 06-Changelog.md
-          sed -i '//r latest_changes.txt' 06-Changelog.md
+          # Mengarahkan langsung ke path content/06-Changelog.md
+          CHANGELOG_PATH="content/06-Changelog.md"
+          
+          if [ ! -f "$CHANGELOG_PATH" ]; then
+            echo "Error: File tidak ditemukan di $CHANGELOG_PATH"
+            exit 1
+          fi
+          
+          # Membersihkan area di antara tag dan menyisipkan log baru
+          sed -i '//,//{//!d}' "$CHANGELOG_PATH"
+          sed -i '//r latest_changes.txt' "$CHANGELOG_PATH"
 
       - name: Commit and Push
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add 06-Changelog.md
-          # [skip ci] sangat penting agar tidak terjadi looping build
+          git add content/06-Changelog.md
+          # [skip ci] mencegah build berulang (infinite loop)
           git commit -m "docs: auto-update changelog [skip ci]" || echo "No changes to commit"
           git push
